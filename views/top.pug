@@ -1,0 +1,26 @@
+doctype html
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha256-fx038NkLY4U1TCrBDiu5FWPEa9eiZu01EiLryshJbCo=" crossorigin="anonymous")
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css")
+    title NNチャット - ルーム一覧
+  body.container.py-5(style="background-color: #f8f9fa;")
+    h1.text-center.text-primary.mb-5 NNチャット
+      i.bi-chat-dots-fill.ms-2
+      
+    div.row.justify-content-center
+      div.col-md-8
+        h4.mb-3.text-secondary チャンネルを選択してください
+        
+        div.list-group.shadow-sm
+          each room in rooms
+            a.list-group-item.list-group-item-action.d-flex.justify-content-between.align-items-center.p-3(href=`/${room.name}/posts`)
+              div
+                h5.mb-1.text-primary ##{room.name}
+                if room.description
+                  small.text-muted #{room.description}
+              i.bi-chevron-right.text-secondary
+              
+        div.mt-5.text-center
+          a.btn.btn-outline-secondary.px-4(href="/logout") ログアウト

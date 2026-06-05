@@ -13,9 +13,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Room {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique @db.VarChar(255)
+  description String?
+  posts       Post[]   // This establishes the relationship to the Post model
+  createdAt   DateTime @db.Timestamptz(6) @default(now())
+}
+
 model Post {
   id        Int      @id @default(autoincrement())
   content   String
   postedBy  String   @db.VarChar(255)
   createdAt DateTime @db.Timestamptz(6) @default(now())
+
+  roomId    Int
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
 }
+
